@@ -1,0 +1,257 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  html,
+  body {
+    height: 100%;
+    /* for touch screen */
+    touch-action: none; 
+    overflow: hidden;
+  }
+  
+  body {
+    overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    /* background: #111; */
+    background-color: #0c192c;
+    -webkit-perspective: 1000px;
+            perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+  }
+  
+  #drag-container, #spin-container {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: auto;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    -webkit-transform: rotateX(-10deg);
+            transform: rotateX(-10deg);
+            z-index: 100;
+  }
+  
+  #drag-container img, #drag-container video {
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    position: absolute;
+    left: 0;
+    top: 0;
+    /* max-width: 100%;
+    max-height: 100%;  */
+    width: 100%;
+    height: 100%;
+    /* line-height: 200px; */
+    /* font-size: 50px; */
+    /* text-align: center; */
+    /* -webkit-box-shadow: 0 0 8px #fff;
+            box-shadow: 0 0 8px #fff; */
+    /* -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, #0005); */
+    object-fit: unset;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 2s linear 0s;
+  }
+
+  
+  #drag-container img:hover, #drag-container video:hover {
+    -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, #0007);
+  }
+
+
+  
+  #drag-container p {
+    
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%) rotateX(90deg);
+            transform: translate(-50%,-50%) rotateX(90deg);
+    /* color: rgb(0, 195, 255); */
+    color: rgb(212, 32, 32);
+    animation: fadein ease 15s;
+  }
+
+  @keyframes fadein {
+      from {
+          opacity:0;
+          
+      }
+      to {
+          opacity: 1;
+          
+      }
+  }
+  
+  #ground {
+    width: 900px;
+    height: 900px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%) rotateX(90deg);
+            transform: translate(-50%,-50%) rotateX(90deg);
+    background: -webkit-radial-gradient(center center, farthest-side , #9993, transparent);
+  }
+  
+  #music-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+  
+  @-webkit-keyframes spin {
+    from{
+      -webkit-transform: rotateY(0deg);
+              transform: rotateY(0deg);
+    } to{
+      -webkit-transform: rotateY(360deg);
+              transform: rotateY(360deg);
+    }
+  }
+  
+  @keyframes spin {
+    from{
+      -webkit-transform: rotateY(0deg);
+              transform: rotateY(0deg);
+    } to{
+      -webkit-transform: rotateY(360deg);
+              transform: rotateY(360deg);
+    }
+  }
+  @-webkit-keyframes spinRevert {
+    from{
+      -webkit-transform: rotateY(360deg);
+              transform: rotateY(360deg);
+    } to{
+      -webkit-transform: rotateY(0deg);
+              transform: rotateY(0deg);
+    }
+  }
+  @keyframes spinRevert {
+    from{
+      -webkit-transform: rotateY(360deg);
+              transform: rotateY(360deg);
+    } to{
+      -webkit-transform: rotateY(0deg);
+              transform: rotateY(0deg);
+    }
+  }
+
+  #canvas {
+    background-color:transparent;   
+    color: transparent; 
+    margin: 0;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    width: 100vw;
+  }
+
+
+#canva {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    overflow: hidden;
+}
+
+p {
+    font-family: 'Dancing Script', cursive;
+    font-family: 'Rampart One', cursive;
+    font-size: 4vw;
+    text-align: center;    
+}
+
+span{
+    position: absolute;
+    pointer-events: none;
+    filter: drop-shadow(0 0 15px rgba(0,0,0,0.5));
+    animation: fadeInout 1s linear infinite;
+    z-index: 100;
+}
+@keyframes fadeInout {
+    0%,100%{
+    opacity: 0;
+    }
+    20%,80%{
+        opacity: 1;
+    }
+}
+span:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(./heart-shape.png);
+    background-size: cover;
+    animation: moveShape 1s linear infinite;
+    z-index: 100;
+}
+@keyframes moveShape {
+    0% {
+        transform: translate(0) rotate(0deg);
+    }
+    100% {
+        transform: translate(300px) rotate(360deg);
+    }
+}
+
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+}
+.bubbles {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.bubbles span {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #4fc3dc;
+  margin: 0 4px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 10px #4fc3dc44,
+  0 0 50px #4fc3dc, 0 0 100px #4fc3dc;
+  animation: animate1 15s linear infinite;
+  animation-duration: calc(150s / var(--i));
+  left: calc(var(--pos) * 38px);
+}
+.bubbles span:nth-child(even) {
+  background-color: #ff2d75;
+  box-shadow: 0 0 0 10px #ff2d7544, 0 0 50px #ff2d75, 0 0 100px #ff2d75;
+}
+.bubbles span::before {
+  content: '';
+  background: none;
+}
+@keyframes animate1 {
+  0%{
+    transform:translateY(100vh) scale(0);
+  }
+  20% {
+    transform: translateY(80vh) scale(0.5);
+  }
+  40%{
+    transform: translateY(60vh) scale(1);
+  }
+  60%{
+    transform: translateY(40vh) scale(0.5);
+  }
+  80% {
+    transform: translateY(20vh) scale(1);
+  }
+  100%{
+    transform: translateY(-0vh) scale(0);
+  }
+}
